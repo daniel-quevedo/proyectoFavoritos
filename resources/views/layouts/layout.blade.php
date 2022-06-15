@@ -8,10 +8,7 @@
     <title>@yield('title')</title>
 </head>
 <body class="d-flex h-100 text-center text-white bg-dark bg-gradient">
-    <div class="container d-flex w-100 h-100 p-2 mx-auto flex-column">
-        <header class="mb-5">
-            <h3 class="float-md-start mb-0">Proyecto Favoritos</h3>
-        </header>
+    <div class="container d-flex w-100 h-100 p-5 mx-auto flex-column">
         <main class="px-3 my-5 ">
             @yield('content')
         </main>
