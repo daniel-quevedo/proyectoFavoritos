@@ -60,7 +60,8 @@ class FavoritosController extends Controller
         ->get();
 
         if (isset($request->detalle)) {
-            return view('favoritos.detalleFav',compact('favSeleccionado'));
+            $redireccion = 'no';
+            return view('favoritos.detalleFav',compact('favSeleccionado','redireccion'));
         } else {
             return view('favoritos.editarFav',compact('favSeleccionado','listarCat'));
         }
@@ -97,12 +98,13 @@ class FavoritosController extends Controller
 
     public function vistaFavoritos(Request $request)
     {
+        $redireccion = $request->detalle;
         $favSeleccionado = DB::table('favoritos as fav')
         ->select('fav.*','cat.nombre as categoria')
         ->where('fav.id', $request->idFav)
         ->join('categorias as cat', 'fav.categoriasAsociadas','cat.id')
         ->first();
 
-        return view('favoritos.detalleFav', compact('favSeleccionado'));
+        return view('favoritos.detalleFav', compact('favSeleccionado','redireccion'));
     }
 }

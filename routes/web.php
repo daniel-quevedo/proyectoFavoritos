@@ -18,11 +18,6 @@ use Illuminate\Support\Facades\DB;
 
 Route::get('/', function () {
 
-    return view('welcome');
-});
-
-Route::get('/dashboard', function () {
-
     $favoritos = DB::table('favoritos as fav')
     ->select('fav.*','cat.nombre as categoria','usu.name as usuario')
     ->where('fav.visibilidad', 'Público')
@@ -31,8 +26,11 @@ Route::get('/dashboard', function () {
     ->orderByDesc('fav.id')
     ->paginate(10);
 
-    return view('dashboard',compact('favoritos'));
+    return view('welcome',compact('favoritos'));
+})->name('welcome');
 
+Route::get('/dashboard', function () {
+    return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
